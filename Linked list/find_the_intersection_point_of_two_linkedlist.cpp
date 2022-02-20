@@ -1,8 +1,3 @@
-int min(int a, int b) {
-	if (a>b)
-		return a;
-	return b;
-}
 int count(Node* head) {
 	size_t nodes{};
 	for (Node *curr = head; curr; curr = curr->next)
@@ -16,26 +11,20 @@ void get_intersection_node(Node* first, Node* second)
 
 	int d = abs(len1-len2);
 
-	Node* bigger, *lesser;
-	if (len1 > len2) {
-		bigger = first;
-		lesser = second;
-	} else {
-		bigger = second;
-		lesser = first;
+	if (len1>len2)
+		for (size_t i={}; i < d; i++)
+			first = first->next;
+	else
+		for (size_t i={}; i < d; i++)
+			second = second->next;
+
+	while (first != second) {
+		first = first->next;
+		second = second->next;
 	}
 
-	for (size_t i={}; i < d; i++)
-	bigger = bigger->next;
-
-	while (bigger && lesser) {
-		if (bigger == lesser) {
-			printf("Intersection node address is: %p, Value: %d\n", bigger, bigger->data);
-			return;
-		}
-		bigger = bigger->next;
-		lesser = lesser->next;
-	}
-
-	std::cout << "No Intersection\n";
+	if (first && first == second)
+		printf("Intersection node address is: %p, Value: %d\n", first, first->data);
+	else
+		printf("No Intersection\n");
 }
